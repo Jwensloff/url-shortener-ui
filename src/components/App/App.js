@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrls } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
-function App () {
+function App() {
   const [urls, setUrls] = useState([]);
 
   useEffect(() => {
-
-  })
+    getUrls().then((data) => {
+      // console.log(data)
+      setUrls(data.urls);
+    });
+  }, []);
 
   return (
-    <main className="App">
+    <main className='App'>
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm
+          postUrls={postUrls}
+          setUrls={setUrls}
+          urls={urls}
+          getUrls={getUrls}
+        />
       </header>
 
-      <UrlContainer urls={"<<<Urls should go here>>>"}/>
+      <UrlContainer urls={urls} />
     </main>
   );
 }
