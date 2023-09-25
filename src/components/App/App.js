@@ -9,7 +9,6 @@ function App() {
 
   useEffect(() => {
     getUrls().then((data) => {
-      // console.log(data)
       setUrls(data.urls);
     }).catch(error => console.log(error));
   }, []);
