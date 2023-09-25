@@ -1,7 +1,10 @@
 const getUrls = () => {
-  return fetch('http://localhost:3001/api/v1/urls').then((response) =>
-    response.json()
-  );
+  return fetch('http://localhost:3001/api/v1/urls').then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
 };
 
 const postUrls = (newUrl) => {
@@ -13,7 +16,7 @@ const postUrls = (newUrl) => {
     body: JSON.stringify(newUrl),
   }).then((response) => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(response.status);
     }
     return response.json();
   });

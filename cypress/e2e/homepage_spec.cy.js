@@ -1,5 +1,4 @@
 describe('User interacting with the site from pageload', () => {
-  
   beforeEach(() => {
     cy.intercept('GET', 'http://localhost:3001/api/v1/urls', {
       statusCode: 200,
@@ -26,18 +25,24 @@ describe('User interacting with the site from pageload', () => {
       statusCode: 201,
       body: {
         long_url: 'https://unsplash.com/photos/atOlntWcO4k',
-        short_url:'http://localhost:3001/useshorturl/2',
+        short_url: 'http://localhost:3001/useshorturl/2',
         title: 'Cute photo',
       },
     }).as('postUrl');
     cy.get('form').get("input[name='title']").type('Cute photo');
-    cy.get('form').get("input[name='title']").should('have.value', 'Cute photo')
-    cy.get('form').get("input[name='urlToShorten']").type('https://unsplash.com/photos/atOlntWcO4k')
-    cy.get('form').get("input[name='urlToShorten']").should('have.value', 'https://unsplash.com/photos/atOlntWcO4k')
-    cy.get('.submit-btn').click()
-    cy.wait('@postUrl')
+    cy.get('form')
+      .get("input[name='title']")
+      .should('have.value', 'Cute photo');
+    cy.get('form')
+      .get("input[name='urlToShorten']")
+      .type('https://unsplash.com/photos/atOlntWcO4k');
+    cy.get('form')
+      .get("input[name='urlToShorten']")
+      .should('have.value', 'https://unsplash.com/photos/atOlntWcO4k');
+    cy.get('.submit-btn').click();
+    cy.wait('@postUrl');
     cy.get('.url').should('have.length', 2);
-    cy.get('.url').first().should('contain', 'Awesome photo')
-    cy.get('.url').last().should('contain', 'Cute photo')
+    cy.get('.url').first().should('contain', 'Awesome photo');
+    cy.get('.url').last().should('contain', 'Cute photo');
   });
 });

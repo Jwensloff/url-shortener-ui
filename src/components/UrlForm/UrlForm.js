@@ -7,12 +7,10 @@ function UrlForm({ postUrls, setUrls, urls, getUrls }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearInputs();
-
     const newUrl = {
       long_url: urlToShorten,
       title: title,
     };
-
     postUrls(newUrl)
       .then((data) => {
         setUrls([...urls, data]);
@@ -44,7 +42,9 @@ function UrlForm({ postUrls, setUrls, urls, getUrls }) {
         onChange={(e) => setUrlToShorten(e.target.value)}
       />
 
-      <button className='submit-btn' onClick={(e) => handleSubmit(e)}>Shorten Please!</button>
+      <button className='submit-btn' onClick={(e) => handleSubmit(e)}>
+        Shorten Please!
+      </button>
     </form>
   );
 }
