@@ -44,7 +44,7 @@ function UrlForm({ postUrls, setUrls, urls, getUrls }) {
         onChange={(e) => setUrlToShorten(e.target.value)}
       />
 
-      <button onClick={(e) => handleSubmit(e)}>Shorten Please!</button>
+      <button className='submit-btn' onClick={(e) => handleSubmit(e)}>Shorten Please!</button>
     </form>
   );
 }
